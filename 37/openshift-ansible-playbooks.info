@@ -1,5 +1,7 @@
-git clone https://github.com/openshift/openshift-ansible.git
+./ping-hosts.sh && git clone https://github.com/openshift/openshift-ansible.git
+cd openshift-ansible
 git checkout release-3.7
+cd ..
 
 # example inventory file
-/usr/share/doc/openshift-ansible-docs-<OPENSHIFT_VERSION>/docs/example-inventories/hosts.example
+#/usr/share/doc/openshift-ansible-docs-<OPENSHIFT_VERSION>/docs/example-inventories/hosts.example
