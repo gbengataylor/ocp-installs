@@ -1,0 +1,16 @@
+---
+- hosts: nodes
+  name: Fix DNS
+  become: yes
+
+  tasks:
+    - name: restart dbus
+      service:
+      name: dbus
+      state: restarted
+
+    - name: restart dnsmasq
+      service:
+      name: dnsmasq
+      state: restarted
+
