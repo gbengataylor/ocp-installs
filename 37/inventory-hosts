@@ -3,6 +3,7 @@
 masters
 nodes
 etcd
+nfs
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -15,30 +16,40 @@ ansible_become=true
 openshift_deployment_type=openshift-enterprise
 
 #metrics
-#openshift_metrics_cassandra_storage_type=dynamic
 openshift_metrics_install_metrics=true
+#
+#openshift_metrics_cassandra_storage_type=dynamic
+#or
 openshift_metrics_storage_kind=nfs
 openshift_metrics_storage_access_modes=['ReadWriteOnce']
 openshift_metrics_storage_nfs_directory=/exports
 openshift_metrics_storage_nfs_options='*(rw,root_squash)'
 openshift_metrics_storage_volume_name=metrics
 openshift_metrics_storage_volume_size=10Gi
+openshift_metrics_storage_labels={'storage': 'metrics'}
 
 #logging
 openshift_logging_install_logging=true
+#
 #openshift_logging_es_pvc_dynamic=true
+#or
 openshift_logging_storage_kind=nfs
 openshift_logging_storage_access_modes=['ReadWriteOnce']
 openshift_logging_storage_nfs_directory=/exports
 openshift_logging_storage_nfs_options='*(rw,root_squash)'
 openshift_logging_storage_volume_name=logging
 openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage': 'logging'}
 
 #temp - turn off docker storage
 openshift_disable_check=docker_storage
 
 # uncomment the following to enable htpasswd authentication; defaults to DenyAllPasswordIdentityProvider
 #openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+
+
+[nfs]
+18.188.76.211.nip.io
 
 # host group for masters
 [masters]
