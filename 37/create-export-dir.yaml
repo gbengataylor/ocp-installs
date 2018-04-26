@@ -1,0 +1,11 @@
+---
+- hosts: nfs
+  name: Fix nfs storage
+  become: yes
+
+  tasks:
+    - name: create exports
+      file:
+         path: /exports
+         state: directory
+         mode: 0755
