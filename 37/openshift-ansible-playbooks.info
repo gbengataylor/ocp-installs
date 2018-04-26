@@ -1,2 +1,5 @@
 git clone https://github.com/openshift/openshift-ansible.git
 git checkout release-3.7
+
+# example inventory file
+/usr/share/doc/openshift-ansible-docs-<OPENSHIFT_VERSION>/docs/example-inventories/hosts.example
