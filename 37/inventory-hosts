@@ -56,7 +56,9 @@ openshift_master_identity_providers=[{'name': 'allow_all', 'login': 'true', 'cha
 
 
 #sub-domain
-openshift_master_default_subdomain=apps.18.188.76.211.nip.io
+#openshift_master_default_subdomain=apps.18.188.76.211.nip.io
+#this should be the infra node
+openshift_master_default_subdomain=apps.18.217.182.217.nip.io
 
 #registry storage
 #openshift.hosted.registry.storage.nfs.directory=/exports
