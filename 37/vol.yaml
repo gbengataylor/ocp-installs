@@ -1,0 +1,14 @@
+#to be run on storage node
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volNNN
+spec:
+  capacity:
+    storage: 10Gi 
+  accessModes:
+    - ReadWriteOnce     
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: /mnt/data/volNNN
