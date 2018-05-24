@@ -1,12 +1,5 @@
-Note: this is the readme for OCP 3.7 Origin not the product
+Download RPMs
 
-see openshift-ansible-playbooks.info
-
-for 37, using https://github.com/openshift/openshift-ansible/tree/release-3.7/playbooks
-git clone https://github.com/openshift/openshift-ansible/tree/release-3.7/playbooks
-cd openshift-ansible
-git checkout release-3.7
-cd ..
 
 
 order
