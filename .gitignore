@@ -1,3 +1,4 @@
 inventory-hosts
 aws-hosts
 ocp-ansible-playbooks/
+*.retry

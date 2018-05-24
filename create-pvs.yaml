@@ -1,0 +1,41 @@
+---
+- hosts: masters
+  name: install htpasswd users and set roles
+  become: yes
+  vars:
+    # you can pass in variables
+    admin_user: admin
+    admin_pass: admin
+    master: master.io:8443 
+
+  tasks:
+    - debug: msg={{ admin_user }}
+    - debug: msg={{ master }}
+
+
+    - name: Download yaml file for volume 
+      get_url:
+        url: https://raw.githubusercontent.com/gbengataylor/ocp-installs/3.9/vol.yaml
+        dest: .
+
+    - name: Run volume script
+      shell: |
+        for i in {0..9}
+        do
+          DIRNAME=$(printf "vol%02d" $i)
+          mkdir -p /mnt/data/$DIRNAME
+          chmod a+rwx /mnt/data/$DIRNAME
+          chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+        done
+
+        oc login {{ master }}: -u {{ admin_user }} -p {{ admin_pass }} 
+
+        for i in {0..9}
+        do
+          DIRNAME=$(printf "vol%02d" $i)
+          sed -i "s/name: vol..*/name: $DIRNAME/g" vol.yaml
+          sed -i "s/path: \/mnt\/data\/vol..*/path: \/mnt\/data\/$DIRNAME/g" vol.yaml
+          oc create -f vol.yaml
+        done
+      args:
+        executable: /bin/bash
