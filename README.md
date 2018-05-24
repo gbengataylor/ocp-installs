@@ -88,21 +88,17 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 Post install
 --------------
+TODO: create ansible playbook to do this from control node
+
 We need to create users, associate the appropriate roles, and create persistent volumes.
 
 
-To create the users and associate the roles. You can pass in the variables as needed
+From the control node: To create the users and associate the roles. You can pass in the variables as needed
 ```
 ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE set-htpasswd-users.yaml 
 ```
 
-For now, this is run manaully on the master, so you have to SSH to the master.
-
-For now, creating volumes is  manaully on the master, so you have to SSH to the master.
-
-TODO: create ansible playbook to do this from control node
-
-
+This can also be run manually if you SSH to the master
 ```
 #modify accordingly
 export ADMIN_USER=admin
@@ -122,7 +118,18 @@ oc adm policy add-cluster-role-to-user cluster-admin ${ADMIN_USER}
 oc adm policy add-cluster-role-to-user cluster-admin ${SYS_ADMIN_USER}
 
 systemctl restart atomic-openshift-master-api
+```
 
+To create persistent volumes from the control node:
+```
+
+For now, this is run manaully on the master, so you have to SSH to the master.
+
+For now, creating volumes is  manaully on the master, so you have to SSH to the master.
+```
+
+Alternate: SSH to the master and execute manually:
+```
 for i in {0..9}
 do
 	DIRNAME=$(printf "vol%02d" $i)
