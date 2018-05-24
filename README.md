@@ -98,7 +98,7 @@ From the control node: To create the users and associate the roles. You can pass
 ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE set-htpasswd-users.yaml 
 ```
 
-This can also be run manually if you SSH to the master
+Alternative: This can also be run manually if you SSH to the master
 ```
 #modify accordingly
 export ADMIN_USER=admin
@@ -122,10 +122,7 @@ systemctl restart atomic-openshift-master-api
 
 To create persistent volumes from the control node:
 ```
-
-For now, this is run manaully on the master, so you have to SSH to the master.
-
-For now, creating volumes is  manaully on the master, so you have to SSH to the master.
+ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE create-pvs.yaml
 ```
 
 Alternate: SSH to the master and execute manually:
