@@ -33,7 +33,12 @@ Prep the control node and prepare the target hosts
 ---------------
 
 `````````
+#modify as needed
+echo AWS_PEM_FILE= 
+
 ./fix-control-node.sh
+
+#before running this, make sure to set the appropriate env variables in the files for the master, infra and compute nodes
 ./set-inventory-hosts.sh
 ./ping-hosts.sh
 `````````
