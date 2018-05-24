@@ -101,13 +101,16 @@ export SYS_ADMIN_USER=system
 export USERNAME=developer
 export PASSWORD=
 
+#if using htpasswd as identity provider perform the following commands. If not, skip
 yum install  httpd-tools
 htpasswd -b /etc/origin/master/htpasswd ${ADMIN_USER} ${ADMIN_PASS}
 htpasswd -b /etc/origin/master/htpasswd ${SYS_ADMIN_USER} ${ADMIN_PASS}
+htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
+
+#update user roles
 oc adm policy add-cluster-role-to-user cluster-admin ${ADMIN_USER}
 oc adm policy add-cluster-role-to-user cluster-admin ${SYS_ADMIN_USER}
 
-htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
 systemctl restart atomic-openshift-master-api
 
 for i in {0..9}
