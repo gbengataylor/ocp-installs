@@ -41,7 +41,7 @@ echo AWS_PEM_FILE=
 #before running this, make sure to set the appropriate env variables in the files for the master, infra and compute nodes
 ./set-inventory-hosts.sh
 
-#if that doesn't work (put your host names..if using IPs, append .nip.io)
+#if that doesn't work (replace with your host names..if using IPs, append .nip.io)
 export MASTER=
 export INFRA=
 export COMPUTE=
