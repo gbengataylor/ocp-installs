@@ -1,3 +1,5 @@
+Note: Assumes there is 1 master, 1 infra, 1 compute. But this can easily be modified for an HA env
+
 Download RPMs to control/install host
 ---------------------------------------
 `````````
@@ -27,7 +29,7 @@ yum -y install atomic-openshift-utils  atomic
 `````````
 The directory /usr/share/ansible/openshift-ansible/ should now exist
 
-More-prep
+Prep the control node and prepare the target hosts
 ---------------
 
 `````````
