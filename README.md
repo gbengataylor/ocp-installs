@@ -1,6 +1,7 @@
 Download RPMs to control/install host
 ---------------------------------------
 `````````
+#update as needed
 export $RHSM_USER=
 export $RHSM_PASS=
 
