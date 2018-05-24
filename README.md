@@ -88,8 +88,6 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 Post install
 --------------
-TODO: create ansible playbook to do this from control node
-
 We need to create users, associate the appropriate roles, and create persistent volumes.
 
 
