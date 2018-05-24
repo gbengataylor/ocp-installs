@@ -122,7 +122,8 @@ systemctl restart atomic-openshift-master-api
 
 To create persistent volumes from the control node:
 ```
-ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE create-pvs.yaml
+export MASTER_CONSOLE=$MASTER:8443
+ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE create-pvs.yaml  --extra-vars "master={{ lookup ('env', 'MASTER_CONSOLE:8443') }}"
 ```
 
 Alternate: SSH to the master and execute manually:
