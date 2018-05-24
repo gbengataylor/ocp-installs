@@ -65,13 +65,25 @@ cd ocp-ansible-playbooks/galaxy-39
 update the hosts file 
 `````
 ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ../../aws-hosts prepare_cluster.yml --extra-vars "rhn_user={{ lookup ('env', 'RHSM_USER') }} rhn_pass={{ lookup ('env', 'RHSM_PASS') }} rhn_pool_id={{ lookup ('env', 'POOL_ID') }} ocp_repos=rhel-7-server-ose-3.9-rpms cluster_name=ocp-cluster"
+
 cd ../..
 `````
 
-pre-work
-install
+Install OpenShift
+--------------------------
+```
+./pre-work.sh
+./install.sh
+```
+Things may go wrong during the install. If it's related to DNS then run
+```
+./fix-dns.sh
+```
+then re-execute the install.sh script
 
-#maybe
+Post install
+--------------
+create users
 example-roles
 create-pvs (not working)
 
