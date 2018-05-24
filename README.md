@@ -94,5 +94,6 @@ To uninstal
 
 #optional, remove pre-reqs
 
-ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ./aws-hosts ocp-ansible-playbooks/galaxy-39/unprepare-cluster.yaml
+ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ./aws-hosts ocp-ansible-playbooks/galaxy-39/unprepare-cluster.yaml --extra-vars "uninstall_3rdparty=true"
+
 ```
