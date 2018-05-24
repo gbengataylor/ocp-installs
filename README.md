@@ -88,29 +88,27 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 Post install
 --------------
-
-
-create users
-example-roles
-create-pvs (not working)
+We need to create users, associate the appropriate roles, and create persistent volumes. For now, this is run manaully on the master, so you have to SSH to the master.
 
 TODO: create ansible playbook to do this from control node
 
-For now, run this on master manually
 
 ```
+#modify accordingly
+export ADMIN_USER=admin
+export ADMIN_PASS=
+export SYS_ADMIN_USER=system
+export USERNAME=developer
+export PASSWORD=
+
 yum install  httpd-tools
 htpasswd -b /etc/origin/master/htpasswd ${ADMIN_USER} ${ADMIN_PASS}
 htpasswd -b /etc/origin/master/htpasswd ${SYS_ADMIN_USER} ${ADMIN_PASS}
 oc adm policy add-cluster-role-to-user cluster-admin ${ADMIN_USER}
+oc adm policy add-cluster-role-to-user cluster-admin ${SYS_ADMIN_USER}
 
 htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
 systemctl restart atomic-openshift-master-api
-
-```
-#!/bin/bash
-
-. $(dirname $0)/install.conf
 
 for i in {0..9}
 do
@@ -122,6 +120,8 @@ done
 
 #login into openshift
 oc login $MASTER:8443 -u $ADMIN_USER -p $ADMIN_PASS
+
+wget https://raw.githubusercontent.com/gbengataylor/ocp-installs/3.9/vol.yaml
 
 for i in {0..9}
 do
