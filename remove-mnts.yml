@@ -1,0 +1,10 @@
+---
+- hosts: masters
+  name: remove mounts
+  become: yes
+
+  tasks:
+    - name: Remove pv mounts
+      file:
+        state: absent
+        path: /mnt/data
