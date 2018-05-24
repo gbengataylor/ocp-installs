@@ -48,6 +48,8 @@ export COMPUTE=
 
 export INVENTORY_HOSTS=inventory-hosts
 
+#Before doing this make sure your inventory-hosts.env file has all the settings you need 
+
 envsubst < inventory-hosts.env > inventory-hosts
 
 ./ping-hosts.sh
