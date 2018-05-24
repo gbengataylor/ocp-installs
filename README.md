@@ -51,10 +51,14 @@ export INVENTORY_HOSTS=inventory-hosts
 envsubst < inventory-hosts.env > inventory-hosts
 
 ./ping-hosts.sh
+
+
 `````````
 
 prepare the hosts for the install using https://raw.githubusercontent.com/gbengataylor/ocp-ansible-playbooks/master/galaxy-39/prepare_cluster.yml
 `````
+envsubst < aws-hosts.env > aws-hosts
+
 git clone https://github.com/gbengataylor/ocp-ansible-playbooks.git
 cd ocp-ansible-playbooks/galaxy-39
 `````
