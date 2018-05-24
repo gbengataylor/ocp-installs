@@ -1,4 +1,11 @@
 #login as system admin first to the master
+oc adm policy add-cluster-role-to-user cluster-admin system
+oc adm policy add-cluster-role-to-user cluster-admin admin
+
+oc adm policy add-role-to-user cluster-admin system --config=/etc/origin/master/admin.kubeconfig 
+oc adm policy add-role-to-user cluster-admin admin  --config=/etc/origin/master/admin.kubeconfig 
+
+
 oc adm policy add-role-to-user admin system -n default
 
 oc adm policy add-role-to-user admin system -n kube-public
