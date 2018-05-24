@@ -153,7 +153,7 @@ do
 done
 ```
 
-To uninstal
+To uninstall
 ----------------
 ```
 ./uninstall.sh
