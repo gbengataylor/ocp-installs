@@ -88,9 +88,50 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 Post install
 --------------
+
+
 create users
 example-roles
 create-pvs (not working)
+
+TODO: create ansible playbook to do this from control node
+
+For now, run this on master manually
+
+```
+yum install  httpd-tools
+htpasswd -b /etc/origin/master/htpasswd ${ADMIN_USER} ${ADMIN_PASS}
+htpasswd -b /etc/origin/master/htpasswd ${SYS_ADMIN_USER} ${ADMIN_PASS}
+oc adm policy add-cluster-role-to-user cluster-admin ${ADMIN_USER}
+
+htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
+systemctl restart atomic-openshift-master-api
+
+```
+#!/bin/bash
+
+. $(dirname $0)/install.conf
+
+for i in {0..9}
+do
+	DIRNAME=$(printf "vol%02d" $i)
+	mkdir -p /mnt/data/$DIRNAME
+        chmod a+rwx /mnt/data/$DIRNAME
+	chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+done
+
+#login into openshift
+oc login $MASTER:8443 -u $ADMIN_USER -p $ADMIN_PASS
+
+for i in {0..9}
+do
+	DIRNAME=$(printf "vol%02d" $i)
+	sed -i "s/name: vol..*/name: $DIRNAME/g" vol.yaml
+	sed -i "s/path: \/mnt\/data\/vol..*/path: \/mnt\/data\/$DIRNAME/g" vol.yaml
+	oc create -f vol.yaml
+	echo "created volume $i"
+done
+```
 
 To uninstal
 ----------------
