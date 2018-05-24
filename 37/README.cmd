@@ -1,7 +1,9 @@
+see openshift-ansible-playbooks.info
+
 for 37, using https://github.com/openshift/openshift-ansible/tree/release-3.7/playbooks
 git clone https://github.com/openshift/openshift-ansible/tree/release-3.7/playbooks
 cd openshift-ansible
-git branch release-3.7
+git https://github.com/openshift/openshift-ansible/tree/release-3.7/playbooks release-3.7
 cd ..
 
 
