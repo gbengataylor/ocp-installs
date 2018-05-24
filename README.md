@@ -81,7 +81,11 @@ Things may go wrong during the install. If it's related to DNS then run
 ```
 ./fix-dns.sh
 ```
-then re-execute the install.sh script
+then re-execute the install.sh script. If you need to fix the inventory file, modify inventory-hosts.env and re-run
+```
+envsubst < inventory-hosts.env > inventory-hosts
+
+```
 
 Post install
 --------------
