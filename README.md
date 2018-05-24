@@ -40,6 +40,16 @@ echo AWS_PEM_FILE=
 
 #before running this, make sure to set the appropriate env variables in the files for the master, infra and compute nodes
 ./set-inventory-hosts.sh
+
+#if that doesn't work (put your host names..if using IPs, append .nip.io)
+export MASTER=
+export INFRA=
+export COMPUTE=
+
+export INVENTORY_HOSTS=inventory-hosts
+
+envsubst < inventory-hosts.env > inventory-hosts
+
 ./ping-hosts.sh
 `````````
 
@@ -50,8 +60,8 @@ cd ocp-ansible-playbooks/galaxy-39
 `````
 update the hosts file 
 `````
-ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ./hosts prepare_cluster.yml --extra-vars "rhn_user={{ lookup ('env', 'RH_USER') }} rhn_pass={{ lookup ('env', 'RH_PASS') }} rhn_pool_id={{ lookup ('env', 'RH_POOL') }} ocp_repos=rhel-7-server-ose-3.9-rpms cluster_name=ocp-cluster"
-cd ..
+ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ../../aws-hosts prepare_cluster.yml --extra-vars "rhn_user={{ lookup ('env', 'RHSM_USER') }} rhn_pass={{ lookup ('env', 'RHSM_PASS') }} rhn_pool_id={{ lookup ('env', 'POOL_ID') }} ocp_repos=rhel-7-server-ose-3.9-rpms cluster_name=ocp-cluster"
+cd ../..
 `````
 
 pre-work
@@ -65,3 +75,5 @@ To uninstal
 ----------------
 #uninstall
 uninstall
+
+ansible-playbook -u ec2-user --private-key $AWS_PEM_FILE  -i ./aws-hosts cd ocp-ansible-playbooks/galaxy-39/tear_down_oc_cluster_aws.yml  --extra-vars "cluster_name=ocp-cluster"
