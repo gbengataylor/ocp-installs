@@ -88,7 +88,17 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 Post install
 --------------
-We need to create users, associate the appropriate roles, and create persistent volumes. For now, this is run manaully on the master, so you have to SSH to the master.
+We need to create users, associate the appropriate roles, and create persistent volumes.
+
+
+To create the users and associate the roles. You can pass in the variables as needed
+```
+ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE set-htpasswd-users.yaml 
+```
+
+For now, this is run manaully on the master, so you have to SSH to the master.
+
+For now, creating volumes is  manaully on the master, so you have to SSH to the master.
 
 TODO: create ansible playbook to do this from control node
 
