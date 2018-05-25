@@ -1,6 +1,8 @@
 #to be run on storage node
 apiVersion: v1
 kind: PersistentVolume
+labels:
+  volume: createdpvs
 metadata:
   name: volNNN
 spec:
@@ -9,6 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce     
     - ReadWriteMany
+    - ReadOnlyMany
   persistentVolumeReclaimPolicy: Recycle
   hostPath:
     path: /mnt/data/volNNN
