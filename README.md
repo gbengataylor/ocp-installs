@@ -4,8 +4,8 @@ Download RPMs to control/install host
 ---------------------------------------
 `````````
 #update as needed
-export $RHSM_USER=
-export $RHSM_PASS=
+export RHSM_USER=
+export RHSM_PASS=
 
 subscription-manager register --username=$RHSM_USER --password=$RHSM_PASS
 if [ -z "$POOL_ID" ]
