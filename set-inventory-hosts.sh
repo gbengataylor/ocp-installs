@@ -1,6 +1,6 @@
-export MASTER=18.188.76.211.nip.io
-export INFRA=18.217.182.217.nip.io
-export COMPUTE=52.15.184.233.nip.io 
+export MASTER=18.191.88.27.nip.io
+export INFRA=18.191.104.127.nip.io
+export COMPUTE=18.222.98.180.nip.io 
 
 #export INVENTORY_HOSTS=inventory-hosts-dns
 export INVENTORY_HOSTS=inventory-hosts
