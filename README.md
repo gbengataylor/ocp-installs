@@ -34,12 +34,12 @@ Prep the control node and prepare the target hosts
 
 `````````
 #modify as needed
-echo AWS_PEM_FILE= 
+export AWS_PEM_FILE= 
 
 ./fix-control-node.sh
 
 #before running this, make sure to set the appropriate env variables in the files for the master, infra and compute nodes
-./set-inventory-hosts.sh
+source set-inventory-hosts.sh
 
 #if that doesn't work (replace with your host names..if using IPs, append .nip.io)
 export MASTER=
@@ -124,7 +124,7 @@ export MASTER_CONSOLE=https://$MASTER:8443
 ansible-playbook -i $INVENTORY_HOSTS --private-key $AWS_PEM_FILE create-pvs.yaml  --extra-vars "master={{ lookup ('env', 'MASTER_CONSOLE') }}"
 ```
 
-Alternate: SSH to the master and execute manually:
+Alternate: SSH to the storage (nfs) node and execute manually:
 ```
 for i in {0..9}
 do
@@ -134,7 +134,7 @@ do
 	chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
 done
 
-#login into openshift
+#login into openshift, ensure that atomic-openshift-utils has been installed
 oc login $MASTER:8443 -u $ADMIN_USER -p $ADMIN_PASS
 
 wget https://raw.githubusercontent.com/gbengataylor/ocp-installs/3.9/vol.yaml
