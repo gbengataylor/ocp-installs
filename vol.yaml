@@ -12,6 +12,7 @@ spec:
     - ReadWriteOnce     
 #    - ReadWriteMany
 #    - ReadOnlyMany
-  persistentVolumeReclaimPolicy: Recycle
+# persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /mnt/data/volNNN
