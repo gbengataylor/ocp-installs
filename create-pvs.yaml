@@ -25,6 +25,8 @@
 
     - name: Run volume script
       shell: |
+
+        echo "create directories..."
         for i in {0..9}
         do
           DIRNAME=$(printf "vol%02d" $i)
@@ -35,7 +37,7 @@
           chown :nfsnobody /mnt/data/$DIRNAME
 
         done
-
+        echo "logging into OpenShift...."
         oc login {{ master }}: -u {{ admin_user }} -p {{ admin_pass }} --insecure-skip-tls-verify=true
 
         for i in {0..9}
