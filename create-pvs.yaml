@@ -1,5 +1,5 @@
 ---
-- hosts: masters
+- hosts: nfs
   name: install htpasswd users and set roles
   become: yes
   vars:
@@ -18,6 +18,11 @@
         url: https://raw.githubusercontent.com/gbengataylor/ocp-installs/3.9/vol.yaml
         dest: .
 
+    - name: Install atomic-openshift-clients
+      yum:
+        name: atomic-openshift-clients
+        state: present
+
     - name: Run volume script
       shell: |
         for i in {0..9}
@@ -26,9 +31,12 @@
           mkdir -p /mnt/data/$DIRNAME
           chmod a+rwx /mnt/data/$DIRNAME
           chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+          chown nfsnobody /mnt/data/$DIRNAME
+          chown :nfsnobody /mnt/data/$DIRNAME
+
         done
 
-        oc login {{ master }}: -u {{ admin_user }} -p {{ admin_pass }} 
+        oc login {{ master }}: -u {{ admin_user }} -p {{ admin_pass }} --insecure-skip-tls-verify=true
 
         for i in {0..9}
         do
