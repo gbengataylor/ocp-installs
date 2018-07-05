@@ -10,8 +10,8 @@ spec:
     storage: 10Gi 
   accessModes:
     - ReadWriteOnce     
-    - ReadWriteMany
-    - ReadOnlyMany
+#    - ReadWriteMany
+#    - ReadOnlyMany
   persistentVolumeReclaimPolicy: Recycle
   hostPath:
     path: /mnt/data/volNNN
