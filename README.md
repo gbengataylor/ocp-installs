@@ -57,6 +57,8 @@ envsubst < inventory-hosts.env > inventory-hosts
 
 `````````
 
+CNS (optional) -- If CNS is desired, follow the instructions in https://github.com/red-hat-storage/openshift-cic to update the inventory file
+
 prepare the hosts for the install using https://raw.githubusercontent.com/gbengataylor/ocp-ansible-playbooks/master/galaxy-39/prepare_cluster.yml
 `````
 #update the aws-hosts.env file if installing HA cluster
